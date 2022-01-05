@@ -6,8 +6,22 @@ const App = () => {
   ])
   const [newName, setNewName] = useState('')
 
-  const addPerson = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
+    let exists = false
+
+    persons.forEach(person => {
+      console.log(person);
+      if (person.name === newName) {
+        alert(`${newName} already exists in the phonebook`)
+        exists = true
+      }
+    })
+
+    if (exists) {
+      return
+    }
+
     const personObject = {
       name: newName,
       date: new Date().toISOString(),
@@ -23,7 +37,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
+      <form onSubmit={handleSubmit}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
         </div>
@@ -32,7 +46,8 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <div>{persons.map(person =>
+      <div>
+        {persons.map(person =>
           <p key={person.id}>{person.name}</p>
         )}
       </div>
