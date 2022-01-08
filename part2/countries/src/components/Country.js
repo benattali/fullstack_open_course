@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Country = ({ country }) => {
-  console.log(country);
   return (
     <>
       <h2>{country["name"]["common"]}</h2>

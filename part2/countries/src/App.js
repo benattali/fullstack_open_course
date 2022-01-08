@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Country from './components/Country'
+import Display from './components/Display'
 
 const App = () => {
   const [allCountries, setAllCountries] = useState([])
@@ -30,19 +31,19 @@ const App = () => {
   let display
   let showCountry = false
   if (countries.length > 10) {
-    display = <p>too many matches, specify another filter</p>
+    display = "too many matches, specify another filter"
   } else if (countries.length > 1) {
-    display = countries.map(country => <p key={country["name"]["common"]}>{country["name"]["common"]}</p>)
+    display = countries.map(country => country)
   } else if (countries.length === 1) {
     showCountry = true
   } else {
-    display = <p>search for a country</p>
+    display = "search for a country"
   }
 
   return (
     <div>
       <p>find countries <input value={filter} onChange={handleCountryChange} /></p>
-      {!showCountry && display}
+      {!showCountry && <Display display={display} setCountries={setCountries} />}
       {showCountry && <Country country={countries[0]} />}
     </div>
   )
