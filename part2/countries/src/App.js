@@ -17,26 +17,32 @@ const App = () => {
 
   const handleCountryChange = (event) => {
     setFilter(event.target.value)
+
+    if (event.target.value === '') {
+      setCountries([])
+      return
+    }
+
     const filteredCountries = allCountries.filter(country => country["name"]["common"].toLowerCase().includes(event.target.value))
     setCountries(filteredCountries)
   }
 
-  let display = []
+  let display
   let showCountry = false
   if (countries.length > 10) {
-    display.push("too many matches, specify another filter")
+    display = <p>too many matches, specify another filter</p>
   } else if (countries.length > 1) {
-    display = countries.map(country => country["name"]["common"])
+    display = countries.map(country => <p key={country["name"]["common"]}>{country["name"]["common"]}</p>)
   } else if (countries.length === 1) {
     showCountry = true
   } else {
-    display.push("search for a country")
+    display = <p>search for a country</p>
   }
 
   return (
     <div>
       <p>find countries <input value={filter} onChange={handleCountryChange} /></p>
-      {!showCountry && display.map((d) => <p key={d}>{d}</p>)}
+      {!showCountry && display}
       {showCountry && <Country country={countries[0]} />}
     </div>
   )
