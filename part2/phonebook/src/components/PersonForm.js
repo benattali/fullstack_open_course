@@ -1,4 +1,5 @@
 import React from 'react'
+import personServices from '../services/persons'
 
 const PersonForm = (props) => {
   const {
@@ -9,6 +10,7 @@ const PersonForm = (props) => {
     setNewName,
     setNewNumber,
   } = props
+
   const handleSubmit = (event) => {
     event.preventDefault()
     let exists = false
@@ -30,9 +32,13 @@ const PersonForm = (props) => {
       id: persons.length + 1,
     }
 
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNumber('')
+    personServices
+    .create(personObject)
+    .then(returnedPerson => {
+      setPersons(persons.concat(returnedPerson))
+      setNewName('')
+      setNewNumber('')
+    })
   }
 
   const handleNameChange = (event) => setNewName(event.target.value)
