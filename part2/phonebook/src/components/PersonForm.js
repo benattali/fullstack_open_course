@@ -13,31 +13,35 @@ const PersonForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    let exists = false
-
-    persons.forEach(person => {
-      if (person.name === newName) {
-        alert(`${newName} already exists in the phonebook`)
-        exists = true
-      }
-    })
-
-    if (exists) {
-      return
-    }
+    const allNames = persons.map(person => person.name)
 
     const personObject = {
       name: newName,
       number: newNumber,
     }
 
-    personServices
-    .create(personObject)
-    .then(returnedPerson => {
-      setPersons(persons.concat(returnedPerson))
-      setNewName('')
-      setNewNumber('')
-    })
+    if (allNames.includes(newName)) {
+      if (!window.confirm(`${newName} already exists. Replace with new info?`)) {
+        return null
+      }
+      const personId = persons.find(person => person.name === newName).id
+      console.log(personId);
+      personServices
+        .update(personId, personObject)
+        .then(returnedPerson => {
+          setPersons(persons.map(person => person.id !== personId ? person : returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        })
+    } else {
+      personServices
+       .create(personObject)
+       .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        })
+    }
   }
 
   const handleNameChange = (event) => setNewName(event.target.value)
