@@ -9,6 +9,7 @@ const PersonForm = (props) => {
     setPersons,
     setNewName,
     setNewNumber,
+    setErrorMessage,
   } = props
 
   const handleSubmit = (event) => {
@@ -32,6 +33,12 @@ const PersonForm = (props) => {
           setPersons(persons.map(person => person.id !== personId ? person : returnedPerson))
           setNewName('')
           setNewNumber('')
+          setErrorMessage(
+            `${newName} was updated`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
         })
     } else {
       personServices
@@ -40,6 +47,12 @@ const PersonForm = (props) => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          setErrorMessage(
+            `${newName} was created`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
         })
     }
   }
