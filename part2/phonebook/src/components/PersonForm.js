@@ -9,7 +9,6 @@ const PersonForm = (props) => {
     setPersons,
     setNewName,
     setNewNumber,
-    setErrorMessage,
   } = props
 
   const handleSubmit = (event) => {
@@ -26,33 +25,20 @@ const PersonForm = (props) => {
         return null
       }
       const personId = persons.find(person => person.name === newName).id
-      console.log(personId);
       personServices
         .update(personId, personObject)
         .then(returnedPerson => {
           setPersons(persons.map(person => person.id !== personId ? person : returnedPerson))
           setNewName('')
           setNewNumber('')
-          setErrorMessage(
-            `${newName} was updated`
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 5000)
         })
     } else {
       personServices
        .create(personObject)
        .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
+          setPersons(returnedPerson)
           setNewName('')
           setNewNumber('')
-          setErrorMessage(
-            `${newName} was created`
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 5000)
         })
     }
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import personServices from '../services/persons';
 
-const Persons = ({ personsToShow, persons, setPersons, setErrorMessage }) => {
+const Persons = ({ personsToShow, persons, setPersons }) => {
   const removePerson = id => {
     if (!window.confirm("delete this person?")) {
       return null
@@ -11,14 +11,6 @@ const Persons = ({ personsToShow, persons, setPersons, setErrorMessage }) => {
       .remove(id)
       .then(() => {
         setPersons(persons.filter(person => person.id !== id))
-      })
-      .catch(error => {
-        setErrorMessage(
-          `${id} was already removed from server`
-        )
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
       })
   }
 
