@@ -11,8 +11,7 @@ const PersonForm = (props) => {
     setNewNumber,
   } = props
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleSubmit = () => {
     const allNames = persons.map(person => person.name)
 
     const personObject = {
