@@ -21,9 +21,9 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 // const note = new Note({
-//   content: "GET and POST are the most important methods of HTTP protocol",
+//   content: "Browser can execute only Javascript",
 //   date: new Date(),
-//   important: true
+//   important: false
 // })
 
 // note.save().then(result => {
@@ -31,9 +31,9 @@ const Note = mongoose.model('Note', noteSchema)
 //   mongoose.connection.close()
 // })
 
-Note.find({ important: true }).then(result => {
-  result.forEach(note => {
-    console.log(note)
-  })
-  mongoose.connection.close()
-})
+// Note.find({ important: true }).then(result => {
+//   result.forEach(note => {
+//     console.log(note)
+//   })
+//   mongoose.connection.close()
+// })
