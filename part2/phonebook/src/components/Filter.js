@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Filter = ({ newFilter, setNewFilter, setShowAll }) => {
+const Filter = ({ newFilter, setNewFilter }) => {
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value)
-    setShowAll(false)
   }
 
   return (

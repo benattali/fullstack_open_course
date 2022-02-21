@@ -9,11 +9,13 @@ const PersonForm = (props) => {
     setPersons,
     setNewName,
     setNewNumber,
+    notify,
   } = props
 
-  const handleSubmit = () => {
-    const allNames = persons.map(person => person.name)
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
+    const allNames = persons.map(person => person.name)
     const personObject = {
       name: newName,
       number: newNumber,
@@ -30,14 +32,22 @@ const PersonForm = (props) => {
           setPersons(persons.map(person => person.id !== personId ? person : returnedPerson))
           setNewName('')
           setNewNumber('')
+          notify(`Updated info of ${returnedPerson.name}`)
+        })
+        .catch(error => {
+          notify(error.response.data.error, 'alert')
         })
     } else {
       personServices
        .create(personObject)
        .then(returnedPerson => {
-          setPersons(returnedPerson)
+          setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          notify(`Added ${returnedPerson.name}`)
+        })
+        .catch(error => {
+          notify(error.response.data.error, 'alert')
         })
     }
   }
