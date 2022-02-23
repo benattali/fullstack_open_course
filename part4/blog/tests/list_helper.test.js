@@ -30,4 +30,27 @@ describe("list_helper", () => {
       expect(result).toBe(0)
     })
   })
+
+  describe("favoriteBlog", () => {
+    test("when a list greater than 1", () => {
+      const blogs = [{ title: "title", likes: 2 }, { title: "dif title", likes: 3 }]
+
+      const result = listHelper.favoriteBlog(blogs)
+      expect(result).toEqual({ title: "dif title", likes: 3 })
+    })
+
+    test("when a list greater is 1", () => {
+      const blogs = [{ title: "title", likes: 2 }]
+
+      const result = listHelper.favoriteBlog(blogs)
+      expect(result).toEqual({ title: "title", likes: 2 })
+    })
+
+    test("when empty list", () => {
+      const blogs = []
+
+      const result = listHelper.favoriteBlog(blogs)
+      expect(result).toEqual({})
+    })
+  })
 })
