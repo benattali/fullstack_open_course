@@ -53,4 +53,27 @@ describe("list_helper", () => {
       expect(result).toEqual({})
     })
   })
+
+  describe("mostBlogs", () => {
+    test("when a list greater than 1", () => {
+      const blogs = [{ title: "title", likes: 2, author: "ben" }, { title: "dif title", likes: 3, author: "ben" }, { title: "t", likes: 10, author: "someone else" }]
+
+      const result = listHelper.mostBlogs(blogs)
+      expect(result).toEqual({ author: "ben", blogs: 2 })
+    })
+
+    test("when a list greater is 1", () => {
+      const blogs = [{ title: "title", likes: 2, author: "ben" }]
+
+      const result = listHelper.mostBlogs(blogs)
+      expect(result).toEqual({ author: "ben", blogs: 1 })
+    })
+
+    test("when empty list", () => {
+      const blogs = []
+
+      const result = listHelper.mostBlogs(blogs)
+      expect(result).toEqual({})
+    })
+  })
 })
