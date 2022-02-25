@@ -76,4 +76,34 @@ describe("list_helper", () => {
       expect(result).toEqual({})
     })
   })
+
+  describe("mostBlogs", () => {
+    test("when a list greater than 1", () => {
+      const blogs = [{ title: "title", likes: 2, author: "ben" }, { title: "dif title", likes: 3, author: "ben" }, { title: "t", likes: 10, author: "someone else" }]
+
+      const result = listHelper.mostLikes(blogs)
+      expect(result).toEqual({ author: "someone else", likes: 10 })
+    })
+
+    test("when author has multiple blogs", () => {
+      const blogs = [{ title: "title", likes: 2, author: "ben" }, { title: "dif title", likes: 3, author: "ben" }, { title: "t", likes: 10, author: "someone else" }, { title: "test", likes: 13, author: "ben" }]
+
+      const result = listHelper.mostLikes(blogs)
+      expect(result).toEqual({ author: "ben", likes: 18 })
+    })
+
+    test("when a list greater is 1", () => {
+      const blogs = [{ title: "title", likes: 2, author: "ben" }]
+
+      const result = listHelper.mostLikes(blogs)
+      expect(result).toEqual({ author: "ben", likes: 2 })
+    })
+
+    test("when empty list", () => {
+      const blogs = []
+
+      const result = listHelper.mostLikes(blogs)
+      expect(result).toEqual({})
+    })
+  })
 })
