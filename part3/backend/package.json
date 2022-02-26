@@ -6,8 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
+    "lint": "eslint . --fix",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit"
   },
   "author": "Ben Attali",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.2"
   },
@@ -22,7 +23,8 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.7.0",
     "jest": "^27.4.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   },
   "jest": {
     "testEnvironment": "node"
