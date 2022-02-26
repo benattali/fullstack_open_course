@@ -2,6 +2,6 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-  "content": "testing express",
-  "important": false
+  "content": "testing a post request",
+  "important": true
 }
