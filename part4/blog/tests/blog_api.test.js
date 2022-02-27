@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
-
 const Blog = require('../models/blog')
 
 beforeEach(async () => {
@@ -35,7 +34,7 @@ test('unique identifier is called id', async () => {
   expect(firstBlog.id).toBeDefined()
 })
 
-test('a valid blog can be added ', async () => {
+test('a valid blog can be added', async () => {
   const newBlog = {
     title: 'new blog to post',
     author: 'post request',
@@ -56,6 +55,24 @@ test('a valid blog can be added ', async () => {
   expect(contents).toContain(
     'new blog to post'
   )
+})
+
+test('the likes property defaults to 0', async () => {
+  const newBlog = {
+    title: 'new blog to post',
+    author: 'post request',
+    url: 'www.api.post.request'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd.slice(-1)[0].likes).toEqual(0)
 })
 
 afterAll(() => {
