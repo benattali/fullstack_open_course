@@ -75,6 +75,21 @@ test('the likes property defaults to 0', async () => {
   expect(blogsAtEnd.slice(-1)[0].likes).toEqual(0)
 })
 
+test('a blog without title and url is not added', async () => {
+  const newBlog = {
+    author: 'post request',
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
