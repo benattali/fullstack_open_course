@@ -130,6 +130,31 @@ describe('deletion of a note', () => {
   })
 })
 
+describe('updating a note', () => {
+  test('a note can be updated with a status code of 200', async () => {
+    const notesAtStart = await helper.notesInDb()
+    const noteToUpdate = notesAtStart[0]
+
+    const updatedNote = {
+      content: 'updated content of note',
+    }
+
+    await api
+      .put(`/api/notes/${noteToUpdate.id}`)
+      .send(updatedNote)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const notesAtEnd = await helper.notesInDb()
+    expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
+
+    const contents = notesAtEnd.map(n => n.content)
+    expect(contents).toContain(
+      'updated content of note'
+    )
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
