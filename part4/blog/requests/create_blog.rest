@@ -3,7 +3,8 @@ Content-Type: application/json
 
 {
   "url": "www.google.com",
-  "title": "no title",
-  "author": "shakespeare",
-  "likes": 80
+  "title": "first blog of some user",
+  "author": "a random user",
+  "likes": 3,
+  "userId": "622e4d2fc9756ef621a2e992"
 }
