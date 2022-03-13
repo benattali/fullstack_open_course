@@ -1,5 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYyMmU0ZDJmYzk3NTZlZjYyMWEyZTk5MiIsImlhdCI6MTY0NzIwNDk3MCwiZXhwIjoxNjQ3MjA4NTcwfQ.hkt4UY6znGr-oTmJ_swgXNDsPCXNqk4kQ9dw5MNhDOI
 
 {
   "url": "www.google.com",
