@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYyMmU0ZDJmYzk3NTZlZjYyMWEyZTk5MiIsImlhdCI6MTY0NzIwNTc3MCwiZXhwIjoxNjQ3MjA5MzcwfQ.cw8o5kBgvRrD-QTQeSamlBrKK7uEe6iaqdOLRlOIEe8
+# add Authorization: bearer {token}
 
 {
   "url": "www.google.com",
